@@ -3,14 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Egil &amp; Felicia – 4 oktober 2026</title>
-  <meta name="description" content="Vi gifter oss på Edsåsdalens Fjällhotell den 4 oktober 2026. Välkommen att fira med oss!" />
+  <title>Egil &amp; Felicia – 3 oktober 2026</title>
+  <meta name="description" content="Vi gifter oss på Edsåsdalens Fjällhotell den 3 oktober 2026. Välkommen att fira med oss!" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+
+  <!-- PASSWORD GATE -->
+  <div id="password-gate" class="password-gate">
+    <div class="password-box">
+      <p class="password-eyebrow">Egil &amp; Felicia</p>
+      <h2 class="password-heading">Välkommen!</h2>
+      <p class="password-sub">Ange lösenordet för att komma in.</p>
+      <form id="password-form" novalidate>
+        <div class="password-input-wrap">
+          <input
+            type="password"
+            id="password-input"
+            placeholder="Lösenord"
+            autocomplete="current-password"
+            autocorrect="off"
+            autocapitalize="none"
+            spellcheck="false"
+          />
+          <button type="submit" class="btn btn-primary">→</button>
+        </div>
+        <p id="password-error" class="password-error"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- SITE CONTENT (hidden until password unlocked) -->
+  <div id="site-content" style="display:none;">
 
   <!-- NAV -->
   <nav id="nav">
@@ -24,7 +51,7 @@
         <li><a href="#accommodation">Boende</a></li>
         <li><a href="#travel">Resa</a></li>
         <li><a href="#rsvp">OSA</a></li>
-        <li><a href="#contact">Kontakt</a></li>
+        <li><a href="#contact">Toastmadams</a></li>
         <li><a href="#gifts">Presenter</a></li>
         <li><a href="#faq">FAQ</a></li>
       </ul>
@@ -37,7 +64,7 @@
     <div class="hero-content">
       <p class="hero-eyebrow">Vi gifter oss</p>
       <h1>Egil <span class="ampersand">&amp;</span> Felicia</h1>
-      <p class="hero-date">4 oktober 2026</p>
+      <p class="hero-date">3 oktober 2026</p>
       <p class="hero-place">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
         Edsåsdalens Fjällhotell, Åre
@@ -78,119 +105,122 @@
   <section id="schedule" class="section section-light">
     <div class="container">
       <div class="section-header">
-        <p class="section-eyebrow">4 oktober 2026</p>
-        <h2>Dagen i korthet</h2>
-        <p class="section-sub">Här är en översikt av hur vår dag är planerad. Mer detaljer skickas ut i god tid före bröllopet.</p>
+        <p class="section-eyebrow">2–4 oktober 2026</p>
+        <h2>Dagarna i korthet</h2>
+        <p class="section-sub">Ett helt bröllopshelg i fjällen – här är planen. Mer detaljer skickas ut i god tid före.</p>
       </div>
 
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-time">13:00</div>
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <h3>Vigsel</h3>
-            <p>Ceremonin hålls utomhus vid hotellet. Klä dig varmt och bekvämt – det är oktober i fjällen!</p>
-          </div>
+      <!-- Fredag -->
+      <div class="timeline-day">
+        <div class="timeline-day-label">
+          <span>Fredag 2 oktober</span>
         </div>
-        <div class="timeline-item">
-          <div class="timeline-time">14:00</div>
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <h3>Mingel &amp; bubbel</h3>
-            <p>Vi välkomnar er med ett glas medan ni njuter av fjällvyn och den friska luften.</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-time">15:30</div>
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <h3>Bröllopsmiddag</h3>
-            <p>En festmåltid med fokus på lokala råvaror från Jämtlandsregionen. Välkomna in!</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-time">Löpande</div>
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <h3>Tal &amp; underhållning</h3>
-            <p>Välkommen att hålla tal – kontakta vår toastmaster för att boka din plats i programmet.</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-time">20:00</div>
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <h3>Fest &amp; dans</h3>
-            <p>Dansgolvet öppnar och festen tar fart. Vi hoppas se er på dansgolvet!</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-time">02:00</div>
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <h3>God natt</h3>
-            <p>Festen avslutas. Sov gott på hotellet – ni är hemma redan!</p>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-time">18:00</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>Middag på hotellet</h3>
+              <p>Ankom, slappna av och inled helgen med en gemensam middag. Perfekt för att träffas och stämma upp inför bröllopsdagen.</p>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- Lördag -->
+      <div class="timeline-day">
+        <div class="timeline-day-label timeline-day-label--main">
+          <span>Lördag 3 oktober – bröllopsdagen 💍</span>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-time">08:00</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>Hotellfrukost</h3>
+              <p>Starta dagen med en god frukost för er som övernattade på hotellet.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">12:00</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>Lunch</h3>
+              <p>En lätt lunch för att samla kraft inför eftermiddagens höjdpunkt.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">14:00</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>Vigsel i Undersåker kyrka</h3>
+              <p>Ceremonin hålls i Undersåker kyrka. Klä dig varmt och bekvämt – det är oktober i fjällen!</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">16:30</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>Fördrink &amp; mingel</h3>
+              <p>Vi välkomnar er med ett glas medan ni njuter av fjällvyn och den friska höstluften.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">18:00</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>Alla är till bords – festen kan börja!</h3>
+              <p>En festmåltid med lokala råvaror, tal, musik och dans långt in på natten.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Söndag -->
+      <div class="timeline-day">
+        <div class="timeline-day-label">
+          <span>Söndag 4 oktober</span>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-time">10:00</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>Brunch</h3>
+              <p>Avsluta helgen med en gemensam brunch och återblicka på en minnesvärd helg.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
   <!-- ACCOMMODATION -->
   <section id="accommodation" class="section section-dark">
-    <div class="container">
+    <div class="container container-narrow">
       <div class="section-header">
         <p class="section-eyebrow">Sov gott</p>
         <h2>Boende</h2>
-        <p class="section-sub">Vi rekommenderar att ni bor på Edsåsdalens Fjällhotell – då är ni mitt i festens centrum.</p>
+        <p class="section-sub">Allt boende finns samlat på Edsåsdalen – boka tidigt för att säkra ditt rum.</p>
       </div>
 
-      <div class="cards">
-        <div class="card card-featured">
-          <div class="card-badge">Rekommenderas</div>
-          <div class="card-icon">🏔️</div>
-          <h3>Edsåsdalens Fjällhotell</h3>
-          <p>Bröllopshotellet! Direkt bokning med vår kod ger dig ett reserverat rum i hjärtat av festligheterna. Hotell med charm och karaktär i vacker fjällmiljö.</p>
-          <ul class="card-list">
-            <li>Rum med fjällutsikt</li>
-            <li>Frukost ingår</li>
-            <li>Spa &amp; avkoppling</li>
-            <li>Direkt vid festlokalen</li>
-          </ul>
-          <div class="card-note">
-            <strong>Bokningskod:</strong> <code>EGILFELICIA2026</code><br />
-            Gäller t.o.m. 1 september 2026
-          </div>
-          <a href="https://www.edsasdalens.se" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Boka rum →</a>
-        </div>
-
-        <div class="card">
-          <div class="card-icon">🌲</div>
-          <h3>Stugor i Edsåsdalen</h3>
-          <p>Vill du ha lite mer utrymme? Det finns fjällstugor att hyra i området, perfekt för familjer eller grupper som vill bo ihop.</p>
-          <ul class="card-list">
-            <li>Rymliga stugor</li>
-            <li>Perfekt för familjer</li>
-            <li>Ca 5–10 min till hotellet</li>
-          </ul>
-          <a href="https://www.blocket.se/bostad/hyra/stuga" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Sök stugor →</a>
-        </div>
-
-        <div class="card">
-          <div class="card-icon">🏠</div>
-          <h3>Åre &amp; omnejd</h3>
-          <p>Åre by har ett stort utbud av hotell och Airbnb. Tänk på att boka tidigt – oktober kan vara populärt.</p>
-          <ul class="card-list">
-            <li>Åre by: ca 25 min bil</li>
-            <li>Hotell, vandrarhem, Airbnb</li>
-            <li>Taxi tillgänglig</li>
-          </ul>
-          <a href="https://www.airbnb.se/s/Are" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Sök Airbnb →</a>
-        </div>
+      <div class="card card-featured card-solo">
+        <div class="card-badge">Bröllopshotellet</div>
+        <div class="card-icon">🏔️</div>
+        <h3>Edsåsdalens Fjällhotell &amp; Vandrarhem</h3>
+        <p>Hela bröllopet utspelar sig på Edsåsdalen. Här finns både hotellet med bekväma rum och ett vandrarhem för en enklare och mer prisvärd vistelse – välj det alternativ som passar er bäst.</p>
+        <ul class="card-list">
+          <li>Hotellrum med fjällutsikt</li>
+          <li>Vandrarhem för enklare vistelse</li>
+          <li>Frukost &amp; brunch ingår i helgpaketet</li>
+          <li>Direkt vid festlokalen – inget taxiproblem!</li>
+        </ul>
+        <a href="https://edsasdalen.se/boende-i-edsasdalen/" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Se boendealternativ &amp; boka →</a>
       </div>
 
-      <div class="info-box">
-        <p>💡 <strong>Tips:</strong> Boka boende så snart möjligt. Vi rekommenderar att du bor på hotellet för den kompletta upplevelsen – och slipper oroa dig för transport hem efter festen.</p>
+      <div class="info-box" style="margin-top:1.5rem;">
+        <p>💡 <strong>Boka tidigt!</strong> Eftersom hela sällskapet bor på samma ställe kan rummen ta slut snabbt. Vi rekommenderar att du bokar så snart du vet att du kommer.</p>
       </div>
     </div>
   </section>
@@ -201,50 +231,84 @@
       <div class="section-header">
         <p class="section-eyebrow">Ta dig hit</p>
         <h2>Resa &amp; transport</h2>
-        <p class="section-sub">Edsåsdalen ligger strax utanför Åre i Jämtland. Här är de bästa sätten att ta sig dit.</p>
+        <p class="section-sub">Edsåsdalen ligger i Jämtland, nära Undersåker. Närmaste tågstation är <strong>Undersåker</strong>.</p>
       </div>
 
       <div class="travel-grid">
-        <div class="travel-card">
-          <div class="travel-icon">✈️</div>
-          <h3>Flyg</h3>
-          <p>Närmaste flygplats är <strong>Östersund Airport (OSD)</strong> som ligger ca 11 mil från Edsåsdalen. Därifrån tar man bil eller buss till Åre.</p>
-          <p class="travel-detail">Flygtid från Stockholm: ~1h 10 min</p>
-        </div>
 
-        <div class="travel-card">
+        <div class="travel-card travel-card--featured">
           <div class="travel-icon">🚂</div>
-          <h3>Tåg</h3>
-          <p><strong>SJ</strong> trafikerar sträckan Stockholm–Åre dagligen. Nattåget är ett populärt val – sovvagn finns tillgänglig.</p>
-          <p class="travel-detail">Tågtid från Stockholm: ca 6–7 timmar</p>
-          <a href="https://www.sj.se" class="travel-link" target="_blank" rel="noopener noreferrer">Boka tåg på SJ →</a>
+          <h3>Tåg <span class="travel-recommended">Rekommenderas</span></h3>
+          <p>Ta tåget till <strong>Undersåker station</strong> – det är stationen närmast bröllopet. SJ kör dagligen längs Mittbanan. Nattåget är ett populärt och bekvämt val.</p>
+          <div class="travel-times">
+            <div class="travel-time-row">
+              <span class="travel-from">Stockholm</span>
+              <span class="travel-dur">ca 6–7 timmar</span>
+            </div>
+            <div class="travel-time-row">
+              <span class="travel-from">Malmö</span>
+              <span class="travel-dur">ca 9–10 timmar (byte i Stockholm)</span>
+            </div>
+            <div class="travel-time-row">
+              <span class="travel-from">Luleå</span>
+              <span class="travel-dur">ca 8–9 timmar (byte i Sundsvall)</span>
+            </div>
+          </div>
+          <a href="https://www.sj.se" class="travel-link" target="_blank" rel="noopener noreferrer">Boka tåg på SJ.se →</a>
         </div>
 
         <div class="travel-card">
           <div class="travel-icon">🚗</div>
           <h3>Bil</h3>
-          <p>Kör mot <strong>Åre</strong> via E14. Edsåsdalen hittar du skyltat längs vägen. Parkering finns vid hotellet – kostnadsfritt för gäster.</p>
-          <p class="travel-detail">Körtid från Stockholm: ca 5,5 timmar<br />Från Göteborg: ca 7 timmar<br />Från Malmö: ca 9 timmar</p>
+          <p>Kör mot <strong>Åre/Undersåker</strong> via E14. Edsåsdalen är skyltat längs vägen. Gratis parkering vid hotellet och vandrarhemmet.</p>
+          <div class="travel-times">
+            <div class="travel-time-row">
+              <span class="travel-from">Stockholm</span>
+              <span class="travel-dur">ca 5,5 timmar</span>
+            </div>
+            <div class="travel-time-row">
+              <span class="travel-from">Malmö</span>
+              <span class="travel-dur">ca 9 timmar</span>
+            </div>
+            <div class="travel-time-row">
+              <span class="travel-from">Luleå</span>
+              <span class="travel-dur">ca 5 timmar</span>
+            </div>
+          </div>
         </div>
 
         <div class="travel-card">
-          <div class="travel-icon">🚕</div>
-          <h3>Taxi</h3>
-          <p>Taxi finns att beställa i Åre. För hemkörning efter festen rekommenderar vi att boka i förväg – speciellt under sena kvällar.</p>
-          <p class="travel-detail">Tänk på att boka tidigt – det kan vara ont om taxibilar nattetid i Åre.</p>
+          <div class="travel-icon">✈️</div>
+          <h3>Flyg</h3>
+          <p>Närmaste flygplats är <strong>Östersund Airport (OSD)</strong>, ca 11 mil från Edsåsdalen. Från flygplatsen tar du bil eller buss vidare mot Åre.</p>
+          <div class="travel-times">
+            <div class="travel-time-row">
+              <span class="travel-from">Stockholm (ARN)</span>
+              <span class="travel-dur">ca 1 h 10 min</span>
+            </div>
+            <div class="travel-time-row">
+              <span class="travel-from">Malmö (MMX)</span>
+              <span class="travel-dur">ca 1 h 30 min</span>
+            </div>
+            <div class="travel-time-row">
+              <span class="travel-from">Luleå (LLA)</span>
+              <span class="travel-dur">ca 1 h 15 min</span>
+            </div>
+          </div>
         </div>
+
       </div>
 
       <div class="map-placeholder">
         <div class="map-inner">
           <p>📍 <strong>Edsåsdalens Fjällhotell</strong></p>
-          <p>Edsåsdalen, 830 13 Åre</p>
+          <p>Edsåsdalen, 830 13 Åre &nbsp;·&nbsp; Närmaste tågstation: Undersåker</p>
           <a href="https://www.google.com/maps/search/Eds%C3%A5sdalens+Fj%C3%A4llhotell" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Öppna i Google Maps →</a>
         </div>
       </div>
 
       <div class="info-box">
-        <p>🚌 <strong>Gemensam transport:</strong> Vi undersöker möjligheten att ordna en gemensam buss från Åre centrum till hotellet. Mer information kommer närmre bröllopet.</p>
+        <p>🚌 <strong>Transport från Undersåker:</strong> Vi siktar på att samordna skjuts med de gäster som har bil. Om det behövs ordnar vi en gemensam busstransfer från Undersåker station till hotellet. Mer info kommer närmre bröllopet.</p>
       </div>
     </div>
   </section>
@@ -255,7 +319,7 @@
       <div class="section-header">
         <p class="section-eyebrow">Du är bjuden</p>
         <h2>OSA</h2>
-        <p class="section-sub">Vi ber dig svara senast <strong>1 augusti 2026</strong> så att vi hinner planera en perfekt dag för er alla.</p>
+        <p class="section-sub">Vi ber dig svara senast <strong>1 augusti 2026</strong> så att vi hinner planera en perfekt helg för er alla.</p>
       </div>
 
       <form id="rsvp-form" class="form" novalidate>
@@ -282,36 +346,40 @@
           <span class="form-error" id="attending-error"></span>
         </div>
 
-        <div class="form-group" id="plusone-group">
-          <label for="plusone">Tar du med en plus-ett?</label>
-          <div class="radio-group">
+        <div class="form-group" id="children-group" style="display:none;">
+          <label>Hur många barn tar du med?</label>
+          <div class="radio-group radio-group--inline">
             <label class="radio-label">
-              <input type="radio" name="plusone" value="yes" />
+              <input type="radio" name="children_count" value="0" />
               <span class="radio-custom"></span>
-              Ja, jag tar med mig en partner/gäst
+              0
             </label>
             <label class="radio-label">
-              <input type="radio" name="plusone" value="no" />
+              <input type="radio" name="children_count" value="1" />
               <span class="radio-custom"></span>
-              Nej, jag kommer ensam
+              1
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="children_count" value="2" />
+              <span class="radio-custom"></span>
+              2
             </label>
           </div>
         </div>
 
-        <div class="form-group" id="plusone-name-group" style="display:none;">
-          <label for="plusone-name">Plus-ettans namn</label>
-          <input type="text" id="plusone-name" name="plusone_name" placeholder="Namn på din gäst" autocomplete="off" />
+        <div class="form-group" id="children-names-group" style="display:none;">
+          <label for="children-names">Namn på barnet/barnen</label>
+          <input type="text" id="children-names" name="children_names" placeholder="T.ex. Maja (5 år), Erik (8 år)" autocomplete="off" />
         </div>
 
-        <div class="form-group">
-          <label for="email">E-post</label>
-          <input type="email" id="email" name="email" placeholder="din@email.se" autocomplete="email" />
-          <span class="form-hint">Vi skickar bekräftelse hit</span>
+        <div class="form-group" id="attending-fields" style="display:none;">
+          <label for="phone">Telefonnummer</label>
+          <input type="tel" id="phone" name="phone" placeholder="070 – 000 00 00" autocomplete="tel" />
         </div>
 
         <div class="form-group">
           <label for="dietary">Allergier eller specialkost</label>
-          <textarea id="dietary" name="dietary" rows="3" placeholder="T.ex. glutenintolerans, vegansk, nötalleri – eller lämna tomt om inget behov finns"></textarea>
+          <textarea id="dietary" name="dietary" rows="3" placeholder="T.ex. glutenintolerans, vegansk, nötallergi – ange gärna även barnens matpreferenser om tillämpligt. Lämna tomt om inget behov finns."></textarea>
         </div>
 
         <div class="form-group">
@@ -334,7 +402,7 @@
         <div class="success-icon">🎉</div>
         <h3>Tack för ditt svar!</h3>
         <p>Vi är så glada att du hörde av dig. Vi ser fram emot att fira med dig i fjällen!</p>
-        <p class="success-sub">Har du frågor är du välkommen att kontakta vår toastmaster.</p>
+        <p class="success-sub">Har du frågor är du välkommen att kontakta våra toastmadams.</p>
       </div>
 
       <div id="rsvp-declined" class="success-message success-message--sad" style="display:none;">
@@ -345,36 +413,40 @@
     </div>
   </section>
 
-  <!-- CONTACT / TOASTMASTER -->
+  <!-- CONTACT / TOASTMADAMS -->
   <section id="contact" class="section section-light">
     <div class="container container-narrow">
       <div class="section-header">
         <p class="section-eyebrow">Frågor &amp; surprises</p>
-        <h2>Toastmaster</h2>
-        <p class="section-sub">Vill du hålla tal, ordna en överraskning eller har du andra praktiska frågor? Kontakta vår toastmaster – inte brudparet!</p>
+        <h2>Toastmadams</h2>
+        <p class="section-sub">Vill du hålla tal, ordna en överraskning eller har du andra praktiska frågor? Kontakta våra toastmadams – inte brudparet!</p>
       </div>
 
-      <div class="contact-card">
-        <div class="contact-avatar">TM</div>
-        <div class="contact-info">
-          <h3>Toastmaster</h3>
-          <p class="contact-title">Bröllopskoordinator</p>
-          <p class="contact-note">Namn meddelas närmre bröllopsdagen</p>
-          <div class="contact-methods">
-            <a href="tel:+460000000000" class="contact-method">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.6 19.79 19.79 0 0 1 1.58 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 17.42z"/></svg>
-              Telefon meddelas senare
-            </a>
-            <a href="mailto:toastmaster@example.com" class="contact-method">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-              E-post meddelas senare
-            </a>
+      <div class="contact-card contact-card--two">
+        <div class="contact-person">
+          <div class="contact-avatar">GP</div>
+          <div class="contact-info">
+            <h3>Gabriella Petersson</h3>
+            <p class="contact-title">Toastmadams</p>
           </div>
+        </div>
+        <div class="contact-person">
+          <div class="contact-avatar">NH</div>
+          <div class="contact-info">
+            <h3>Natalie Hallén</h3>
+            <p class="contact-title">Toastmadams</p>
+          </div>
+        </div>
+        <div class="contact-shared">
+          <a href="mailto:toastmadams.ef@gmail.com" class="contact-method">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            toastmadams.ef@gmail.com
+          </a>
         </div>
       </div>
 
       <div class="info-box">
-        <p>🎤 <strong>Vill du hålla tal?</strong> Kontakta toastmastern i god tid före bröllopet för att säkra din plats i talprogrammet och koordinera med övriga talare.</p>
+        <p>🎤 <strong>Vill du hålla tal?</strong> Kontakta toastmadamsen i god tid före bröllopet för att säkra din plats i talprogrammet och koordinera med övriga talare.</p>
       </div>
     </div>
   </section>
@@ -388,27 +460,17 @@
       </div>
 
       <div class="gifts-content">
-        <p class="gifts-intro">Det viktigaste för oss är att ni är här och firar denna dag med oss. Ert sällskap och er kärlek är den bästa presenten vi kan önska oss.</p>
+        <p class="gifts-intro">Det viktigaste för oss är att ni är här och firar denna helg med oss. Vi vet att det innebär en del utgifter för er med resa och boende – ert sällskap och er kärlek är den finaste gåva vi kan önska oss.</p>
 
-        <p>Om ni ändå önskar ge något bidrar vi gärna till en gemensam resa – en dröm vi länge haft.</p>
-
-        <div class="gift-options">
+        <div class="gift-options gift-options--single">
           <div class="gift-option">
-            <div class="gift-icon">✈️</div>
-            <h3>Bidrag till bröllopsresan</h3>
-            <p>Vi drömmer om att resa till Japan. Vill du bidra? Swisha till:</p>
+            <div class="gift-icon">🥂</div>
+            <h3>Bidrag till bröllopsfesten</h3>
+            <p>Vill ni ändå ge något mottager vi hjärtligt eventuella bidrag till bröllopsfesten på nedanstående konto.</p>
             <div class="swish-box">
-              <span class="swish-number">123 456 78 90</span>
-              <p class="swish-name">Egil Eriksson</p>
-              <p class="swish-note">Ange "Bröllopsresa" som meddelande</p>
+              <span class="swish-label">Kontonummer</span>
+              <span class="swish-number">3307 01 53046</span>
             </div>
-          </div>
-
-          <div class="gift-option">
-            <div class="gift-icon">🎁</div>
-            <h3>Önskelista</h3>
-            <p>Vill du ge en mer konkret present? Vår önskelista finns på:</p>
-            <a href="#" class="btn btn-outline">Visa önskelista →</a>
           </div>
         </div>
       </div>
@@ -421,37 +483,28 @@
       <div class="section-header">
         <p class="section-eyebrow">Vanliga frågor</p>
         <h2>FAQ</h2>
-        <p class="section-sub">Här har vi samlat svar på de vanligaste frågorna. Hittar du inte svaret du söker – kontakta toastmastern.</p>
+        <p class="section-sub">Här har vi samlat svar på de vanligaste frågorna. Hittar du inte svaret du söker – kontakta toastmadamsen.</p>
       </div>
 
       <div class="accordion" id="accordion">
+
         <div class="accordion-item">
           <button class="accordion-trigger" aria-expanded="false">
             Kan man ta med barn?
             <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="accordion-content">
-            <p>Vi älskar er barn, men vi har valt att hålla bröllopsmiddagen och festen för vuxna. Barn är välkomna på vigseln. Boka barnvakt i god tid om ni behöver – hotellet kan möjligen hjälpa till med tips på lokala alternativ.</p>
+            <p>Absolut! Hotellet är barnvänligt och barn är välkomna under hela helgen. Ange antalet barn och deras namn i OSA-formuläret så att vi kan planera rätt.</p>
           </div>
         </div>
 
         <div class="accordion-item">
           <button class="accordion-trigger" aria-expanded="false">
-            Finns det parkering vid hotellet?
+            Finns det parkering?
             <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="accordion-content">
-            <p>Ja, det finns gratis parkering vid Edsåsdalens Fjällhotell för alla hotellets gäster. Kom i god tid för att säkra en plats närmast entrén.</p>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <button class="accordion-trigger" aria-expanded="false">
-            Finns det taxi på natten?
-            <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="accordion-content">
-            <p>Taxi finns att boka i Åre, men det kan vara begränsat med bitar sent på natten. Vi rekommenderar varmt att boka taxi i förväg om ni inte bor på hotellet. Boka tidigt – eller ännu bättre: boka ett rum på hotellet!</p>
+            <p>Ja, det finns gratis parkering både vid hotellet och vid vandrarhemmet på Edsåsdalen.</p>
           </div>
         </div>
 
@@ -461,17 +514,7 @@
             <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="accordion-content">
-            <p>I Edsåsdalen kan det i oktober vara allt från +5°C till minusgrader. Det kan till och med vara snö! Klä dig i lager och ha med ordentliga skor och en varm jacka för vigseln utomhus. Inomhus är det givetvis varmt och mysigt.</p>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <button class="accordion-trigger" aria-expanded="false">
-            Kan man stanna hela helgen?
-            <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="accordion-content">
-            <p>Absolut, och vi uppmuntrar det! Åre-regionen har massor att erbjuda – vandring, cykling, och vacker höstfärg. Boka gärna fler nätter på hotellet och gör det till en liten semester.</p>
+            <p>Vi förväntar oss gyllene trädkronor och strålande sol. Om det mot förmodan inte skulle bli så uppmuntras kläder efter väder – ha gärna med ett varmt lager för vigseln utomhus. Inomhus är det alltid varmt och mysigt.</p>
           </div>
         </div>
 
@@ -481,7 +524,7 @@
             <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="accordion-content">
-            <p>Festlig klädsel – vi vill att ni är fina men bekväma. Tänk på att delar av dagen sker utomhus, så välj skor du kan gå i och ha möjlighet att lägga på ett varmt lager.</p>
+            <p>Klädkoden är <strong>kavaj</strong>. Tänk på att delar av dagen sker utomhus, så välj skor du kan gå i och ha möjlighet att lägga på ett varmt lager. <a href="https://alissa.se/kl%c3%a4dkod-kavaj/" target="_blank" rel="noopener noreferrer" class="accordion-link">Läs mer om klädkod kavaj →</a></p>
           </div>
         </div>
 
@@ -491,19 +534,10 @@
             <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="accordion-content">
-            <p>Kontakta vår toastmaster direkt – du hittar kontaktuppgifterna i avsnittet ovan. Anmäl gärna tal i god tid så att toastmastern kan koordinera programmet och se till att alla får sin chans.</p>
+            <p>Kontakta våra toastmadams direkt på <a href="mailto:toastmadams.ef@gmail.com" class="accordion-link">toastmadams.ef@gmail.com</a>. Anmäl gärna tal i god tid så att toastmadamsen kan koordinera programmet och se till att alla får sin chans.</p>
           </div>
         </div>
 
-        <div class="accordion-item">
-          <button class="accordion-trigger" aria-expanded="false">
-            Kan jag ta med en plus-ett?
-            <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="accordion-content">
-            <p>Om din inbjudan gäller för dig och din partner är du välkommen att ta med en plus-ett. Ange detta i OSA-formuläret. Om du är osäker – hör av dig till toastmastern.</p>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -512,7 +546,7 @@
   <footer id="footer">
     <div class="container">
       <div class="footer-names">Egil &amp; Felicia</div>
-      <div class="footer-date">4 oktober 2026 · Edsåsdalens Fjällhotell</div>
+      <div class="footer-date">3 oktober 2026 · Edsåsdalens Fjällhotell</div>
       <nav class="footer-nav" aria-label="Sidfotslänkar">
         <a href="#hero">Hem</a>
         <a href="#schedule">Schema</a>
@@ -524,6 +558,8 @@
       <p class="footer-love">Gjord med kärlek ♥</p>
     </div>
   </footer>
+
+  </div><!-- /site-content -->
 
   <script src="js/main.js"></script>
 </body>
