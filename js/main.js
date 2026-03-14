@@ -207,17 +207,21 @@
 
 /* ── RSVP FORM ──────────────────────────────── */
 (function initRsvpForm() {
-  const form              = document.getElementById('rsvp-form');
-  const successYes        = document.getElementById('rsvp-success');
-  const successNo         = document.getElementById('rsvp-declined');
-  const submitBtn         = document.getElementById('rsvp-submit');
-  const childrenGroup     = document.getElementById('children-group');
+  // ── Klistra in din Google Apps Script Web App URL här ──
+  const SCRIPT_URL = 'KLISTRA_IN_DIN_APPS_SCRIPT_URL_HÄR';
+  // Se google-apps-script.js för installationsinstruktioner.
+
+  const form               = document.getElementById('rsvp-form');
+  const successYes         = document.getElementById('rsvp-success');
+  const successNo          = document.getElementById('rsvp-declined');
+  const submitBtn          = document.getElementById('rsvp-submit');
+  const childrenGroup      = document.getElementById('children-group');
   const childrenNamesGroup = document.getElementById('children-names-group');
-  const attendingFields   = document.getElementById('attending-fields');
+  const attendingFields    = document.getElementById('attending-fields');
 
   if (!form) return;
 
-  // Show/hide children names when count > 0
+  // Visa/dölj barnnamn när antal > 0
   function onChildrenChange() {
     const val = form.querySelector('input[name="children_count"]:checked')?.value;
     if (childrenNamesGroup) {
@@ -229,7 +233,7 @@
     r.addEventListener('change', onChildrenChange);
   });
 
-  // Show/hide attending-specific fields
+  // Visa/dölj fält beroende på om man kommer
   form.querySelectorAll('input[name="attending"]').forEach(radio => {
     radio.addEventListener('change', () => {
       const val = form.querySelector('input[name="attending"]:checked')?.value;
@@ -243,19 +247,19 @@
   function validate() {
     let ok = true;
 
-    const name = document.getElementById('name')?.value.trim();
-    const nameErr = document.getElementById('name-error');
-    if (!name) {
+    const nameInput = document.getElementById('name');
+    const nameErr   = document.getElementById('name-error');
+    if (!nameInput?.value.trim()) {
       if (nameErr) nameErr.textContent = 'Ange ditt namn.';
-      document.getElementById('name')?.classList.add('error');
+      nameInput?.classList.add('error');
       ok = false;
     } else {
       if (nameErr) nameErr.textContent = '';
-      document.getElementById('name')?.classList.remove('error');
+      nameInput?.classList.remove('error');
     }
 
     const attending = form.querySelector('input[name="attending"]:checked');
-    const attErr = document.getElementById('attending-error');
+    const attErr    = document.getElementById('attending-error');
     if (!attending) {
       if (attErr) attErr.textContent = 'Välj ett alternativ.';
       ok = false;
@@ -266,23 +270,12 @@
     return ok;
   }
 
-  // ── Collect form data as object ────────────
   function collectData() {
-    const fd = new FormData(form);
     const data = {};
-    for (const [k, v] of fd.entries()) {
+    for (const [k, v] of new FormData(form).entries()) {
       data[k] = v;
     }
-    data.submitted_at = new Date().toISOString();
     return data;
-  }
-
-  // ── Save to localStorage ───────────────────
-  function saveResponse(data) {
-    const KEY = 'ef_rsvp_responses';
-    const existing = JSON.parse(localStorage.getItem(KEY) || '[]');
-    existing.push(data);
-    localStorage.setItem(KEY, JSON.stringify(existing));
   }
 
   form.addEventListener('submit', async (e) => {
@@ -294,9 +287,18 @@
     submitBtn.disabled = true;
     submitBtn.textContent = 'Skickar…';
 
-    await new Promise(r => setTimeout(r, 600));
-
-    saveResponse(collectData());
+    // Skicka till Google Sheets via Apps Script
+    try {
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors', // krävs för Apps Script – svaret kan inte läsas men datan sparas
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(collectData()).toString()
+      });
+    } catch (err) {
+      // Tyst fel – Apps Script tar emot datan oavsett (no-cors ger ingen felkod)
+      console.warn('RSVP fetch:', err);
+    }
 
     form.style.display = 'none';
     const msg = attending === 'yes' ? successYes : successNo;
@@ -305,65 +307,6 @@
       msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   });
-})();
-
-
-/* ── RSVP EXPORT (admin) ────────────────────── */
-(function initAdmin() {
-  // Access via URL: ?admin
-  if (!window.location.search.includes('admin')) return;
-
-  const KEY = 'ef_rsvp_responses';
-  const responses = JSON.parse(localStorage.getItem(KEY) || '[]');
-
-  if (!responses.length) {
-    alert('Inga svar finns sparade ännu.');
-    return;
-  }
-
-  // Build CSV
-  const cols = [
-    'name', 'attending', 'children_count', 'children_names',
-    'phone', 'dietary', 'song', 'message', 'submitted_at'
-  ];
-  const colLabels = {
-    name: 'Namn',
-    attending: 'Kommer',
-    children_count: 'Antal barn',
-    children_names: 'Barnens namn',
-    phone: 'Telefon',
-    dietary: 'Allergier/kost',
-    song: 'Låtförslag',
-    message: 'Hälsning',
-    submitted_at: 'Inskickat'
-  };
-  const attendingLabel = { yes: 'Ja', no: 'Nej' };
-
-  function esc(v) {
-    if (v === undefined || v === null || v === '') return '';
-    const s = String(v).replace(/"/g, '""');
-    return /[",\n\r]/.test(s) ? `"${s}"` : s;
-  }
-
-  const header = cols.map(c => colLabels[c] || c).join(',');
-  const rows = responses.map(r => {
-    return cols.map(c => {
-      const val = c === 'attending' ? (attendingLabel[r[c]] || r[c]) : r[c];
-      return esc(val);
-    }).join(',');
-  });
-
-  const csv = '\uFEFF' + [header, ...rows].join('\r\n'); // BOM for Excel
-  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-  const url = URL.createObjectURL(blob);
-
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'osa-egil-felicia.csv';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
 })();
 
 
