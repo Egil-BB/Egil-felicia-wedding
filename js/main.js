@@ -4,10 +4,51 @@
 
 'use strict';
 
+/* ── PASSWORD GATE ──────────────────────────── */
+(function initPasswordGate() {
+  const CORRECT_PASSWORD = 'egilhjärtafelicia';
+  const SESSION_KEY = 'ef_unlocked';
+
+  const gate        = document.getElementById('password-gate');
+  const siteContent = document.getElementById('site-content');
+  const form        = document.getElementById('password-form');
+  const input       = document.getElementById('password-input');
+  const errorEl     = document.getElementById('password-error');
+
+  function unlock() {
+    gate.classList.add('hidden');
+    siteContent.style.display = '';
+    sessionStorage.setItem(SESSION_KEY, '1');
+  }
+
+  // Already unlocked this session?
+  if (sessionStorage.getItem(SESSION_KEY) === '1') {
+    unlock();
+    return;
+  }
+
+  if (!form) return;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const val = input.value.trim().toLowerCase();
+    if (val === CORRECT_PASSWORD) {
+      errorEl.textContent = '';
+      input.classList.remove('error');
+      unlock();
+    } else {
+      errorEl.textContent = 'Fel lösenord – försök igen.';
+      input.classList.add('error');
+      input.select();
+    }
+  });
+})();
+
+
 /* ── COUNTDOWN ─────────────────────────────── */
 (function initCountdown() {
-  // Wedding: 4 October 2026 at 13:00 Swedish time (UTC+2 in summer, UTC+1 in winter – Oct is CET = UTC+1)
-  const WEDDING_DATE = new Date('2026-10-04T13:00:00+01:00');
+  // Wedding: 3 October 2026 at 14:00 Swedish time (CET = UTC+1 in October)
+  const WEDDING_DATE = new Date('2026-10-03T14:00:00+01:00');
 
   const elDays    = document.getElementById('cd-days');
   const elHours   = document.getElementById('cd-hours');
@@ -23,11 +64,6 @@
     const diff = WEDDING_DATE - now;
 
     if (diff <= 0) {
-      elDays.textContent    = '00';
-      elHours.textContent   = '00';
-      elMinutes.textContent = '00';
-      elSeconds.textContent = '00';
-      // Replace countdown section with a celebratory message
       const countdown = document.getElementById('countdown');
       if (countdown) {
         countdown.innerHTML = '<div class="countdown-married">🎉 Det är bröllopsdag! 🎉</div>';
@@ -60,19 +96,13 @@
 
   if (!nav) return;
 
-  // Scroll: add class when past hero
   function onScroll() {
-    if (window.scrollY > 60) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
-    }
+    nav.classList.toggle('scrolled', window.scrollY > 60);
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  // Hamburger toggle
   if (hamburger && navLinks) {
     hamburger.addEventListener('click', () => {
       const isOpen = navLinks.classList.toggle('open');
@@ -81,7 +111,6 @@
       document.body.style.overflow = isOpen ? 'hidden' : '';
     });
 
-    // Close menu when a link is clicked
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         navLinks.classList.remove('open');
@@ -91,10 +120,8 @@
       });
     });
 
-    // Close menu when clicking outside
     document.addEventListener('click', (e) => {
-      if (navLinks.classList.contains('open') &&
-          !nav.contains(e.target)) {
+      if (navLinks.classList.contains('open') && !nav.contains(e.target)) {
         navLinks.classList.remove('open');
         hamburger.classList.remove('open');
         hamburger.setAttribute('aria-expanded', 'false');
@@ -107,10 +134,9 @@
 
 /* ── SCROLL REVEAL ──────────────────────────── */
 (function initScrollReveal() {
-  // Add reveal class to elements that should animate in
   const selectors = [
     '.section-header',
-    '.timeline-item',
+    '.timeline-day',
     '.card',
     '.travel-card',
     '.gift-option',
@@ -122,11 +148,9 @@
   ];
 
   const elements = document.querySelectorAll(selectors.join(','));
-
   elements.forEach(el => el.classList.add('reveal'));
 
   if (!('IntersectionObserver' in window)) {
-    // Fallback: show everything immediately
     elements.forEach(el => el.classList.add('visible'));
     return;
   }
@@ -134,7 +158,6 @@
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // Stagger children of the same parent
         const siblings = entry.target.parentElement
           ? Array.from(entry.target.parentElement.children)
           : [];
@@ -144,10 +167,7 @@
         observer.unobserve(entry.target);
       }
     });
-  }, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -40px 0px',
-  });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
   elements.forEach(el => observer.observe(el));
 })();
@@ -166,18 +186,14 @@
     const content = item.querySelector('.accordion-content');
     const isOpen  = trigger.getAttribute('aria-expanded') === 'true';
 
-    // Close all others
     accordion.querySelectorAll('.accordion-trigger').forEach(t => {
       t.setAttribute('aria-expanded', 'false');
-      const c = t.closest('.accordion-item').querySelector('.accordion-content');
-      c.classList.remove('open');
+      t.closest('.accordion-item').querySelector('.accordion-content').classList.remove('open');
     });
 
-    // Toggle clicked
     if (!isOpen) {
       trigger.setAttribute('aria-expanded', 'true');
       content.classList.add('open');
-      // Smooth scroll to item if partly off screen
       setTimeout(() => {
         const rect = item.getBoundingClientRect();
         if (rect.bottom > window.innerHeight) {
@@ -191,111 +207,172 @@
 
 /* ── RSVP FORM ──────────────────────────────── */
 (function initRsvpForm() {
-  const form         = document.getElementById('rsvp-form');
-  const successYes   = document.getElementById('rsvp-success');
-  const successNo    = document.getElementById('rsvp-declined');
-  const submitBtn    = document.getElementById('rsvp-submit');
-  const plusoneGroup = document.getElementById('plusone-group');
-  const plusoneNameGroup = document.getElementById('plusone-name-group');
+  const form              = document.getElementById('rsvp-form');
+  const successYes        = document.getElementById('rsvp-success');
+  const successNo         = document.getElementById('rsvp-declined');
+  const submitBtn         = document.getElementById('rsvp-submit');
+  const childrenGroup     = document.getElementById('children-group');
+  const childrenNamesGroup = document.getElementById('children-names-group');
+  const attendingFields   = document.getElementById('attending-fields');
 
   if (!form) return;
 
-  // Show/hide plusone name field
-  function onPlusoneChange() {
-    const val = form.querySelector('input[name="plusone"]:checked')?.value;
-    if (plusoneNameGroup) {
-      plusoneNameGroup.style.display = val === 'yes' ? 'flex' : 'none';
+  // Show/hide children names when count > 0
+  function onChildrenChange() {
+    const val = form.querySelector('input[name="children_count"]:checked')?.value;
+    if (childrenNamesGroup) {
+      childrenNamesGroup.style.display = (val && val !== '0') ? 'flex' : 'none';
     }
   }
 
-  form.querySelectorAll('input[name="plusone"]').forEach(radio => {
-    radio.addEventListener('change', onPlusoneChange);
+  form.querySelectorAll('input[name="children_count"]').forEach(r => {
+    r.addEventListener('change', onChildrenChange);
   });
 
-  // Hide plusone section if "not attending"
+  // Show/hide attending-specific fields
   form.querySelectorAll('input[name="attending"]').forEach(radio => {
     radio.addEventListener('change', () => {
       const val = form.querySelector('input[name="attending"]:checked')?.value;
-      if (plusoneGroup) {
-        plusoneGroup.style.display = val === 'yes' ? 'flex' : 'none';
-      }
-      if (val !== 'yes' && plusoneNameGroup) {
-        plusoneNameGroup.style.display = 'none';
-      }
+      const coming = val === 'yes';
+      if (childrenGroup)   childrenGroup.style.display   = coming ? 'flex' : 'none';
+      if (attendingFields) attendingFields.style.display = coming ? 'flex' : 'none';
+      if (!coming && childrenNamesGroup) childrenNamesGroup.style.display = 'none';
     });
   });
 
-  // Validation helpers
-  function setError(inputId, errorId, message) {
-    const input = document.getElementById(inputId) || form.querySelector(`[name="${inputId}"]`);
-    const error = document.getElementById(errorId);
-    if (input)  input.classList.toggle('error', !!message);
-    if (error)  error.textContent = message || '';
-    return !!message;
-  }
-
   function validate() {
-    let hasError = false;
+    let ok = true;
 
     const name = document.getElementById('name')?.value.trim();
+    const nameErr = document.getElementById('name-error');
     if (!name) {
-      hasError = setError('name', 'name-error', 'Ange ditt namn.') || hasError;
+      if (nameErr) nameErr.textContent = 'Ange ditt namn.';
+      document.getElementById('name')?.classList.add('error');
+      ok = false;
     } else {
-      setError('name', 'name-error', '');
+      if (nameErr) nameErr.textContent = '';
+      document.getElementById('name')?.classList.remove('error');
     }
 
     const attending = form.querySelector('input[name="attending"]:checked');
+    const attErr = document.getElementById('attending-error');
     if (!attending) {
-      const err = document.getElementById('attending-error');
-      if (err) err.textContent = 'Välj ett alternativ.';
-      hasError = true;
+      if (attErr) attErr.textContent = 'Välj ett alternativ.';
+      ok = false;
     } else {
-      const err = document.getElementById('attending-error');
-      if (err) err.textContent = '';
+      if (attErr) attErr.textContent = '';
     }
 
-    return !hasError;
+    return ok;
   }
 
-  // Submit
+  // ── Collect form data as object ────────────
+  function collectData() {
+    const fd = new FormData(form);
+    const data = {};
+    for (const [k, v] of fd.entries()) {
+      data[k] = v;
+    }
+    data.submitted_at = new Date().toISOString();
+    return data;
+  }
+
+  // ── Save to localStorage ───────────────────
+  function saveResponse(data) {
+    const KEY = 'ef_rsvp_responses';
+    const existing = JSON.parse(localStorage.getItem(KEY) || '[]');
+    existing.push(data);
+    localStorage.setItem(KEY, JSON.stringify(existing));
+  }
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-
     if (!validate()) return;
 
     const attending = form.querySelector('input[name="attending"]:checked')?.value;
 
-    // Disable button and show loading state
     submitBtn.disabled = true;
     submitBtn.textContent = 'Skickar…';
 
-    // --- In a real deployment, POST to a form service like Formspree, Netlify Forms, etc.
-    // For now we simulate a brief network delay and show success.
-    await new Promise(r => setTimeout(r, 800));
+    await new Promise(r => setTimeout(r, 600));
+
+    saveResponse(collectData());
 
     form.style.display = 'none';
-
-    if (attending === 'yes') {
-      successYes.style.display = 'block';
-    } else {
-      successNo.style.display = 'block';
+    const msg = attending === 'yes' ? successYes : successNo;
+    if (msg) {
+      msg.style.display = 'block';
+      msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
-
-    // Scroll to success message
-    (attending === 'yes' ? successYes : successNo)
-      .scrollIntoView({ behavior: 'smooth', block: 'center' });
   });
+})();
+
+
+/* ── RSVP EXPORT (admin) ────────────────────── */
+(function initAdmin() {
+  // Access via URL: ?admin
+  if (!window.location.search.includes('admin')) return;
+
+  const KEY = 'ef_rsvp_responses';
+  const responses = JSON.parse(localStorage.getItem(KEY) || '[]');
+
+  if (!responses.length) {
+    alert('Inga svar finns sparade ännu.');
+    return;
+  }
+
+  // Build CSV
+  const cols = [
+    'name', 'attending', 'children_count', 'children_names',
+    'phone', 'dietary', 'song', 'message', 'submitted_at'
+  ];
+  const colLabels = {
+    name: 'Namn',
+    attending: 'Kommer',
+    children_count: 'Antal barn',
+    children_names: 'Barnens namn',
+    phone: 'Telefon',
+    dietary: 'Allergier/kost',
+    song: 'Låtförslag',
+    message: 'Hälsning',
+    submitted_at: 'Inskickat'
+  };
+  const attendingLabel = { yes: 'Ja', no: 'Nej' };
+
+  function esc(v) {
+    if (v === undefined || v === null || v === '') return '';
+    const s = String(v).replace(/"/g, '""');
+    return /[",\n\r]/.test(s) ? `"${s}"` : s;
+  }
+
+  const header = cols.map(c => colLabels[c] || c).join(',');
+  const rows = responses.map(r => {
+    return cols.map(c => {
+      const val = c === 'attending' ? (attendingLabel[r[c]] || r[c]) : r[c];
+      return esc(val);
+    }).join(',');
+  });
+
+  const csv = '\uFEFF' + [header, ...rows].join('\r\n'); // BOM for Excel
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'osa-egil-felicia.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 })();
 
 
 /* ── SMOOTH SCROLL POLYFILL (Safari < 15.4) ─── */
 (function smoothScrollFallback() {
   if ('scrollBehavior' in document.documentElement.style) return;
-
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-      const id = this.getAttribute('href').slice(1);
-      const target = document.getElementById(id);
+      const target = document.getElementById(this.getAttribute('href').slice(1));
       if (!target) return;
       e.preventDefault();
       target.scrollIntoView({ behavior: 'smooth' });
@@ -308,7 +385,6 @@
 (function activeNavHighlight() {
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
-
   if (!sections.length || !navLinks.length) return;
 
   const observer = new IntersectionObserver((entries) => {
@@ -316,8 +392,8 @@
       if (entry.isIntersecting) {
         const id = entry.target.getAttribute('id');
         navLinks.forEach(link => {
-          const active = link.getAttribute('href') === `#${id}`;
-          link.style.color = active ? 'var(--color-gold-light)' : '';
+          link.style.color = link.getAttribute('href') === `#${id}`
+            ? 'var(--color-gold-light)' : '';
         });
       }
     });
