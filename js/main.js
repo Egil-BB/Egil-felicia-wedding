@@ -208,7 +208,7 @@
 /* ── RSVP FORM ──────────────────────────────── */
 (function initRsvpForm() {
   // ── Klistra in din Google Apps Script Web App URL här ──
-  const SCRIPT_URL = 'KLISTRA_IN_DIN_APPS_SCRIPT_URL_HÄR';
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby15pjbgmKb4vUnVq7MlKkH4_W2I3WlE_Zgc-1--_m3XrNSGty0BR37pbuA0ZJKrYF_uw/exec';
   // Se google-apps-script.js för installationsinstruktioner.
 
   const form               = document.getElementById('rsvp-form');
